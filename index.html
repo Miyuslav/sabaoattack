@@ -225,12 +225,14 @@ function fitScreen(){
   const W_BASE=360, H_BASE=540;
   const scaleX=window.innerWidth/W_BASE;
   const scaleY=window.innerHeight/H_BASE;
-  const scale=Math.min(scaleX,scaleY);
+  const scale=Math.max(scaleX,scaleY);
   const wrapper=document.getElementById('wrapper');
   wrapper.style.transform=`scale(${scale})`;
   // 横方向の余白を中央寄せ
   const offsetX=(window.innerWidth - W_BASE*scale)/2;
   wrapper.style.marginLeft=offsetX+'px';
+  const offsetY=(window.innerHeight - H_BASE*scale)/2;
+  wrapper.style.marginTop=offsetY+'px';
 }
 fitScreen();
 window.addEventListener('resize',fitScreen);
