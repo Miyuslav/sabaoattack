@@ -6,7 +6,8 @@
 <title>サバオアタック</title>
 <style>
 * { box-sizing:border-box; margin:0; padding:0; }
-body { background:#111; display:flex; align-items:center; justify-content:center; min-height:100vh; font-family:sans-serif; -webkit-user-select:none; user-select:none; touch-action:none; }
+html, body { width:100%; height:100%; background:#111; overflow:hidden; font-family:sans-serif; -webkit-user-select:none; user-select:none; touch-action:none; }
+body { display:flex; align-items:flex-start; justify-content:center; }
 #gc { display:block; touch-action:none; cursor:crosshair; }
 #dpad { position:absolute; bottom:20px; left:20px; width:130px; height:130px; }
 #dpad-base { position:absolute; inset:0; border-radius:50%; background:rgba(255,255,255,0.08); border:2px solid rgba(255,255,255,0.15); }
@@ -48,7 +49,7 @@ body { background:#111; display:flex; align-items:center; justify-content:center
 </style>
 </head>
 <body>
-<div style="position:relative;width:360px;margin:0 auto;">
+<div id="wrapper" style="position:relative;width:360px;height:540px;transform-origin:top center;">
 <canvas id="gc" width="360" height="540"></canvas>
 <div id="dpad"><div id="dpad-base"></div><div id="dpad-stick"></div></div>
 <div id="btns">
@@ -218,6 +219,21 @@ function gameLoop(){
 }
 
 ROOMS[0].bg();
+
+// 画面フィット：canvasを画面サイズにスケール
+function fitScreen(){
+  const W_BASE=360, H_BASE=540;
+  const scaleX=window.innerWidth/W_BASE;
+  const scaleY=window.innerHeight/H_BASE;
+  const scale=Math.min(scaleX,scaleY);
+  const wrapper=document.getElementById('wrapper');
+  wrapper.style.transform=`scale(${scale})`;
+  // 横方向の余白を中央寄せ
+  const offsetX=(window.innerWidth - W_BASE*scale)/2;
+  wrapper.style.marginLeft=offsetX+'px';
+}
+fitScreen();
+window.addEventListener('resize',fitScreen);
 </script>
 </body>
 </html>
