@@ -84,16 +84,9 @@ const EPROJ_SPD   = 2.0;   // うんち弾の速度
 
 ---
 
-## 🚀 GitHub Pages への公開
+## プレイ
 
-```bash
-# リポジトリ作成後
-cp sabaoa_ttack.html index.html
-git add index.html
-git commit -m "🎮 サバオアタック 初回リリース"
-git push origin main
-# Settings → Pages → Branch: main / root で公開
-```
+https://miyuslav.github.io/sabaoattack/
 
 ---
 
